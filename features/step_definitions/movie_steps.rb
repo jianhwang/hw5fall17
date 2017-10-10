@@ -69,7 +69,6 @@ When /^I have opted to see movies rated: "(.*?)"$/ do |arg1|
     ratings.each do |rating|
         check("ratings_#{rating.to_s}")
     end
-    
     click_button "Refresh"
 end
 
@@ -99,7 +98,6 @@ end
 Then /^the movies should sorted by "(.*?)"$/ do |sortedBy|
     dbSortMap = {"Title" => :title, "Release Date" => :release_date}
     expected = Movie.order(dbSortMap[sortedBy] => :asc).all
-    
     find("tbody").all("tr").each_with_index do |row, index|
         expect(row).to have_content(expected[index].title)
         expect(row).to have_content(expected[index].release_date)
